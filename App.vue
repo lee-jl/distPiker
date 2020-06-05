@@ -1,11 +1,17 @@
 <template>
     <div id="app">
-        
+        <distpicker v-model="defaultAddress"></distpicker>
     </div>
 </template>
 <script>
+import Distpicker from './components/Distpicker';
 export default {
-    
+    components: { Distpicker },
+    data() {
+        return {
+            defaultAddress: {}
+        }
+    }
 }
 </script>
 <style lang="css">
