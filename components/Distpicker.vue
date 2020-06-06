@@ -56,7 +56,13 @@ export default {
                 if(res.status === 200) {
                     //获取地址
                     this.addressArray = res.data.data;
-
+                    if(this.address.province) {
+                        for(let ad of this.addressArray) {
+                            if(ad.areaName === this.address.province) {
+                                this.cityArray = ad.subarea;
+                            }
+                        }
+                    }
                 }
             })
         },
