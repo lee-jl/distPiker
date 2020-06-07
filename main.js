@@ -1,13 +1,13 @@
 import Vue from 'vue';
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import { Select, Option } from 'element-ui'
 import App from './App.vue';
 
-Vue.use(ElementUI);
+Vue.use(Select);
+Vue.use(Option);
 
-new Vue({
+new  Vue({
     el: '#app',
-    render(h) {
+    render: h => {
         return h(App)
-    },
+    }
 })
