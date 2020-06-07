@@ -16,14 +16,14 @@
                 :value="item.areaName">
             </el-option>
         </el-select>
-        <el-selection v-model="address.district" placeholder="选择区县" @change="onDistrictChanged">
+        <el-select v-model="address.district" placeholder="选择区县" @change="onDistrictChanged">
             <el-option 
-                v-for="item in districtArray"
+                v-for="item in areaArray"
                 :key="item.areaCode"
                 :label="item.areaName"
                 :value="item.areaName">
             </el-option>
-        </el-selection>
+        </el-select>
     </div>
 </template>
 <script>
@@ -41,10 +41,10 @@ export default {
     },
     data() {
         return {
-            areaJson = '',
+            areaJson: '../static/json/pcas.json',
             addressArray: [],
             cityArray: [],
-            districtArray: []
+            areaArray: []
         }
     },
     created() {
@@ -52,14 +52,25 @@ export default {
     },
     methods: {
         getAddressData() {
-            axios.get().then(res => {
+            axios.get(this.areaJson).then(res => {
                 if(res.status === 200) {
                     //获取地址
-                    this.addressArray = res.data.data;
+                    this.addressArray = res.data;
+                    console.dir(this.addressArray);
                     if(this.address.province) {
+                        console.log(this.address.province)
                         for(let ad of this.addressArray) {
                             if(ad.areaName === this.address.province) {
-                                this.cityArray = ad.subarea;
+                                this.cityArray = ad.children;
+                                // 默认赋值获取区域数组
+                                if(this.address.city) {
+                                    for(let area of this.cityArray) {
+                                        if(area.areaName === this.address.city) {
+                                            this.areaArray = area.children;
+                                            break;
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -67,13 +78,31 @@ export default {
             })
         },
         getCityData(val) {
-
+            console.log('AAA', this.address);
+            this.address.province = '';
+            this.address.city = '';
+            this.$emit('change', this.address);
+            for(let ad of this.addressArray) {
+                if(ad.areaName === val) {
+                    this.cityArray = ad.children;
+                    return;
+                }
+            }
         },
         getDistrictData(val) {
-
+            console.log('BBB', this.address);
+            this.address.district = '';
+            this.$emit('change', this.address);
+            for(let area of this.cityArray) {
+                if(area.areaName === val) {
+                    this.areaArray = area.children;
+                    return;
+                }
+            }
         },
         //区县发生变化后
         onDistrictChanged(val) {
+            console.log('CCC', this.address);
             this.$emit('change', this.address);
         }
     }
