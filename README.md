@@ -1,5 +1,5 @@
 # distpicker
-Vue+ElementUI 实现省市区三级联动
+Vue+ElementUI 实现省、市、区县、街道四级联动
 
 > A Vue.js project
 

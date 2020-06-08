@@ -129,7 +129,7 @@ export default {
 			for(let street of this.districtArray) {
 				if(street.name === val) {
 					this.streetArray = street.children;
-					break;
+					return;
 				}
 			}
 		},
