@@ -11,7 +11,12 @@ export default {
     components: { Distpicker },
     data() {
         return {
-            defaultAddress: {}
+            defaultAddress: {
+                province: '',
+                city: '',
+                district: '',
+                street: ''
+            }
         }
     }
 }
