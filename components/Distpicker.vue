@@ -93,7 +93,7 @@ export default {
 		},
 		// 选择省份并获取当前省份的城市数组
 		selectProvince(val) {
-			console.log('省份', this.address.province);
+			// console.log('省份', this.address.province);
 			this.$emit('change', this.address);
 			this.address.city = '';
 			this.address.district = '';
@@ -109,7 +109,7 @@ export default {
 		},
 		// 选择城市，并获取对应的区县数组
 		selectCity(val) {
-			console.log('城市', this.address.city);
+			// console.log('城市', this.address.city);
 			this.$emit('change', this.address);
 			this.address.district = '';
 			this.address.street = '';
@@ -123,7 +123,7 @@ export default {
 		},
 		// 选择区县
 		selectDistrict(val) {
-			console.log('区县', this.address.district);
+			// console.log('区县', this.address.district);
 			this.$emit('change', this.address);
 			this.address.street = '';
 			for(let street of this.districtArray) {
@@ -135,7 +135,7 @@ export default {
 		},
 		// 选择街道
 		selectStreet(val) {
-			console.log('街道', this.address.street);
+			// console.log('街道', this.address.street);
 			this.$emit('change', this.address);
 		}
 	}
