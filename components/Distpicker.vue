@@ -93,6 +93,7 @@ export default {
 		},
 		// 选择省份并获取当前省份的城市数组
 		selectProvince(val) {
+			console.log(val, 'val')
 			// console.log('省份', this.address.province);
 			this.$emit('change', this.address);
 			this.address.city = '';
